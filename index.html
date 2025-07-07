@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Eren'in Web Sitesi</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    /* Zar oyunu bölümü özel stilleri */
+    #zar-oyunu {
+      background: rgba(52, 64, 79, 0.9);
+      border-radius: 20px;
+      padding: 2rem;
+      margin: 2rem 0 4rem 0; /* alt boşluk artırıldı */
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+      text-align: center;
+      display: none; /* Başlangıçta gizli */
+    }
+    #zar-oyunu h2 {
+      color: #ffca28;
+      margin-bottom: 1rem;
+      border-bottom: 2px solid #ffca28;
+      padding-bottom: 0.5rem;
+    }
+    #dice {
+      font-size: 200px;
+      user-select: none;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      gap: 60px;
+      margin: 10px auto 0 auto;
+      max-width: 600px;
+    }
+    #dice > div.player-block {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      position: relative;
+      min-width: 140px;
+    }
+    #dice span.dice-face {
+      cursor: default;
+      user-select: none;
+    }
+    #dice span.name {
+      font-size: 28px;
+      color: #ffca28;
+      margin-top: 6px;
+      font-weight: 600;
+      user-select: none;
+    }
+    .score-info {
+      font-size: 18px;
+      color: #ffd54f;
+      margin-top: 8px;
+      text-align: center;
+    }
+    #rollBtn {
+      background: linear-gradient(45deg, #ffca28, #ffd54f);
+      border: none;
+      padding: 12px 30px;
+      font-size: 18px;
+      border-radius: 25px;
+      cursor: pointer;
+      font-weight: bold;
+      box-shadow: 0 4px 15px rgba(255, 202, 40, 0.3);
+      transition: all 0.3s ease;
+      margin: 20px auto 0 auto;
+      display: block;
+      max-width: 160px;
+    }
+    #rollBtn:hover {
+      background: linear-gradient(45deg, #ffd54f, #ffca28);
+      box-shadow: 0 6px 20px rgba(255, 202, 40, 0.4);
+      transform: translateY(-2px);
+    }
+    #status {
+      margin-top: 30px;
+      font-size: 20px;
+      font-weight: bold;
+      color: #ffd54f;
+      min-height: 1.8em;
+      min-width: 280px;
+      margin-left: auto;
+      margin-right: auto;
+      max-width: 600px;
+    }
+    #round-info {
+      margin-top: 15px;
+      font-size: 20px;
+      color: #e0e0e0;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+      text-align: center;
+    }
+
+    /* İletişim kısmının üst boşluğu */
+    #iletisim {
+      margin-top: 8rem;
+    }
+  </style>
+</head>
+<body>
+  <nav>
+    <ul>
+      <li><a href="#">Ana Sayfa</a></li>
+      <li><a href="#hakkimda">Hakkımda</a></li>
+      <li><a href="#projeler">Projeler</a></li>
+      
+      <li><a href="#iletisim">İletişim</a></li>
+    </ul>
+  </nav>
+
+  <main>
+    <h1 class="glow">Merhaba, ben Eren!</h1>
+    <p>Bu benim kişisel web sitem. Yazılım yolculuğumu burada paylaşıyorum!</p>
+
+    <section id="hakkimda" class="fade-in">
+      <h2>Hakkımda</h2>
+      <p>
+        Ben Eren, yazılım geliştirmeye tutkuyla bağlı bir öğrenciyim. 
+        Bu siteyi hem projelerimi paylaşmak hem de öğrenme sürecimi belgelemek için kurdum. 
+        Java oyunları geliştirmeye özel ilgim var. Yakında hepsini burada bulabileceksiniz!
+      </p>
+    </section>
+
+    <section id="projeler" class="fade-in">
+      <h2>Projeler</h2>
+      <div class="project-list">
+        <div class="project-card">
+          <h3>Zar Oyunu</h3>
+          <p>Java ile geliştirilen basit bir zar simülasyonu.</p>
+          <a href="#zar-oyunu" id="projeler-link-zar">Site İçinde Oyna</a>
+        </div>
+
+        <div class="project-card">
+          <h3>Taş Kağıt Makas</h3>
+          <p>Bilgisayara karşı oynayabileceğin klasik Java oyunu.</p>
+          <a href="https://github.com/KingSlayer192206" target="_blank" rel="noopener noreferrer">GitHub</a>
+        </div>
+      </div>
+    </section>
+
+    <section id="zar-oyunu" class="fade-in">
+      <h2>Zar Oyunu</h2>
+      <p>3 El boyunca karşılıklı zar atılır, el 10 puana ilk ulaşan kazanır. 3 el kazanan oyunu kazanır!</p>
+      <div id="dice">
+        <div class="player-block">
+          <span id="playerDice" class="dice-face" aria-label="Oyuncu zarı" role="img">🎲</span>
+          <span class="name">Sen</span>
+          <div class="score-info">
+            <p>Puan: <span id="playerScore">0</span></p>
+            <p>El Sayısı: <span id="playerSets">0</span></p>
+          </div>
+        </div>
+        <div style="font-size: 48px; color:#ffca28; user-select:none; margin: 0 20px; align-self: center;">vs</div>
+        <div class="player-block">
+          <span id="computerDice" class="dice-face" aria-label="Bilgisayar zarı" role="img">🎲</span>
+          <span class="name">Bilgisayar</span>
+          <div class="score-info">
+            <p>Puan: <span id="computerScore">0</span></p>
+            <p>El Sayısı: <span id="computerSets">0</span></p>
+          </div>
+        </div>
+      </div>
+      <button id="rollBtn">Zarı At</button>
+      <div id="status"></div>
+      <div id="round-info">
+        <p>Tur: <span id="round">0</span></p>
+      </div>
+    </section>
+
+    <section id="iletisim" class="fade-in">
+      <h2>İletişim</h2>
+      <p>E-posta: <p>E-posta: <a href="https://mail.google.com/mail/?view=cm&fs=1&to=erenturkan7777@gmail.com" target="_blank" style="color:#ffca28;">erenturkan7777@gmail.com</a>
+
+
+    </section>
+  </main>
+
+  <footer>
+    <p>© 2025 Eren Türkan | <a href="https://github.com/KingSlayer192206" target="_blank" rel="noopener noreferrer">GitHub</a></p>
+  </footer>
+
+  <script>
+    window.addEventListener('DOMContentLoaded', () => {
+      document.querySelectorAll('.fade-in').forEach(el => el.classList.add('visible'));
+
+      // Zar oyunu başlangıçta gizli, linke tıklayınca göster
+      function showZarOyunu() {
+        const zarSection = document.getElementById('zar-oyunu');
+        zarSection.style.display = 'block';
+        zarSection.scrollIntoView({ behavior: 'smooth' });
+      }
+
+      const link1 = document.getElementById('link-zar-oyunu');
+      const link2 = document.getElementById('projeler-link-zar');
+
+      [link1, link2].forEach(link => {
+        if (link) {
+          link.addEventListener('click', e => {
+            e.preventDefault();
+            showZarOyunu();
+          });
+        }
+      });
+    });
+
+    const diceEmojis = ['⚀', '⚁', '⚂', '⚃', '⚄', '⚅'];
+
+    const playerDice = document.getElementById('playerDice');
+    const computerDice = document.getElementById('computerDice');
+    const rollBtn = document.getElementById('rollBtn');
+    const status = document.getElementById('status');
+    const playerScoreSpan = document.getElementById('playerScore');
+    const computerScoreSpan = document.getElementById('computerScore');
+    const playerSetsSpan = document.getElementById('playerSets');
+    const computerSetsSpan = document.getElementById('computerSets');
+    const roundSpan = document.getElementById('round');
+
+    let playerScore = 0;
+    let computerScore = 0;
+    let playerSets = 0;
+    let computerSets = 0;
+    let round = 0;
+    const winningScore = 10;
+    const maxSets = 3;
+
+    function resetGame() {
+      playerScore = 0;
+      computerScore = 0;
+      playerSets = 0;
+      computerSets = 0;
+      round = 0;
+      playerScoreSpan.textContent = '0';
+      computerScoreSpan.textContent = '0';
+      playerSetsSpan.textContent = '0';
+      computerSetsSpan.textContent = '0';
+      roundSpan.textContent = '0';
+      playerDice.textContent = '🎲';
+      computerDice.textContent = '🎲';
+      status.textContent = '';
+      rollBtn.disabled = false;
+      rollBtn.textContent = 'Zarı At';
+    }
+
+    function resetSet() {
+      playerScore = 0;
+      computerScore = 0;
+      round = 0;
+      playerScoreSpan.textContent = '0';
+      computerScoreSpan.textContent = '0';
+      roundSpan.textContent = '0';
+      playerDice.textContent = '🎲';
+      computerDice.textContent = '🎲';
+      status.textContent = 'Yeni el başladı!';
+    }
+
+    rollBtn.addEventListener('click', () => {
+      if (rollBtn.textContent === 'Tekrar Oyna') {
+        resetGame();
+        return;
+      }
+
+      round++;
+      roundSpan.textContent = round;
+
+      const playerRoll = Math.floor(Math.random() * 6);
+      const computerRoll = Math.floor(Math.random() * 6);
+
+      playerDice.textContent = diceEmojis[playerRoll];
+      computerDice.textContent = diceEmojis[computerRoll];
+
+      if (playerRoll > computerRoll) {
+        playerScore += playerRoll + 1;
+        status.textContent = 'Bu turu sen kazandın!';
+      } else if (computerRoll > playerRoll) {
+        computerScore += computerRoll + 1;
+        status.textContent = 'Bilgisayar bu turu kazandı!';
+      } else {
+        status.textContent = 'Bu tur berabere!';
+      }
+
+      playerScoreSpan.textContent = playerScore;
+      computerScoreSpan.textContent = computerScore;
+
+      if (playerScore >= winningScore || computerScore >= winningScore) {
+        if (playerScore >= winningScore) {
+          playerSets++;
+          status.textContent = `El senin! Toplam el sayın: ${playerSets}`;
+        } else {
+          computerSets++;
+          status.textContent = `El bilgisayarın! Toplam el sayısı: ${computerSets}`;
+        }
+        playerSetsSpan.textContent = playerSets;
+        computerSetsSpan.textContent = computerSets;
+
+        resetSet();
+
+        if (playerSets >= maxSets) {
+          status.textContent = 'Tebrikler, 3 eli kazanarak oyunu kazandın! 🎉';
+          rollBtn.textContent = 'Tekrar Oyna';
+          rollBtn.disabled = false;
+          return;
+        }
+        if (computerSets >= maxSets) {
+          status.textContent = 'Bilgisayar 3 eli kazanarak oyunu kazandı! 😞';
+          rollBtn.textContent = 'Tekrar Oyna';
+          rollBtn.disabled = false;
+          return;
+        }
+      }
+    });
+  </script>
+</body>
+</html>

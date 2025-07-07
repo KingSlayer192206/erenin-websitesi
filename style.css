@@ -1,0 +1,353 @@
+/* Reset ve temel stiller */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    background: linear-gradient(135deg, #22262f, #34404f);
+    color: #ffffff;
+    line-height: 1.6;
+    min-height: 100vh;
+}
+
+/* Navigasyon menüsü */
+nav {
+    background: rgba(52, 64, 79, 0.95);
+    backdrop-filter: blur(10px);
+    padding: 1rem 0;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2rem;
+}
+
+nav ul li a {
+    color: #ffffff;
+    text-decoration: none;
+    font-weight: 500;
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+nav ul li a::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(45deg, #ffca28, #ffd54f);
+    transition: left 0.3s ease;
+    z-index: -1;
+}
+
+nav ul li a:hover::before {
+    left: 0;
+}
+
+nav ul li a:hover {
+    color: #333;
+    transform: translateY(-2px);
+}
+
+/* Ana içerik */
+main {
+    margin-top: 80px;
+    padding: 2rem;
+    max-width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Başlık ve giriş */
+h1 {
+    font-size: 3rem;
+    color: #ffca28;
+    text-align: center;
+    margin: 2rem 0;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    animation: slideInDown 0.8s ease-out;
+}
+
+@keyframes slideInDown {
+    from {
+        opacity: 0;
+        transform: translateY(-50px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+body > p {
+    font-size: 1.2rem;
+    text-align: center;
+    margin-bottom: 3rem;
+    color: #e0e0e0;
+    animation: fadeIn 1s ease-out 0.3s both;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+/* Bölüm stilleri */
+section {
+    background: rgba(52, 64, 79, 0.9);
+    border-radius: 20px;
+    padding: 2rem;
+    margin: 2rem 0;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    animation: slideInUp 0.8s ease-out;
+}
+
+@keyframes slideInUp {
+    from {
+        opacity: 0;
+        transform: translateY(50px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+section h2 {
+    font-size: 2rem;
+    color: #ffca28;
+    margin-bottom: 1rem;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+    border-bottom: 2px solid #ffca28;
+    padding-bottom: 0.5rem;
+}
+
+section p {
+    font-size: 1.1rem;
+    color: #e0e0e0;
+    margin-bottom: 1rem;
+}
+
+/* Proje kartları */
+.project-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    margin-top: 2rem;
+}
+
+.project-card {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 15px;
+    padding: 1.5rem;
+    border: 1px solid rgba(255, 202, 40, 0.3);
+    transition: all 0.3s ease;
+    backdrop-filter: blur(5px);
+}
+
+.project-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 35px rgba(255, 202, 40, 0.2);
+    border-color: #ffca28;
+}
+
+.project-card h3 {
+    color: #ffca28;
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+.project-card p {
+    color: #d0d0d0;
+    margin-bottom: 1rem;
+}
+
+.project-card a {
+    display: inline-block;
+    background: linear-gradient(45deg, #ffca28, #ffd54f);
+    color: #333;
+    text-decoration: none;
+    padding: 0.7rem 1.5rem;
+    border-radius: 25px;
+    font-weight: bold;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(255, 202, 40, 0.3);
+}
+
+.project-card a:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(255, 202, 40, 0.4);
+}
+
+/* Zar oyunu stilleri */
+#dice {
+    width: 150px;
+    height: 150px;
+    margin: 30px auto;
+}
+
+#dice img {
+    width: 100%;
+    height: auto;
+    user-select: none;
+}
+
+#zar-oyunu button {
+    background: #ffca28;
+    border: none;
+    padding: 12px 25px;
+    font-size: 16px;
+    border-radius: 10px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background 0.3s;
+}
+
+#zar-oyunu button:hover {
+    background: #ffd54f;
+}
+
+/* Footer */
+footer {
+    background: rgba(34, 38, 47, 0.95);
+    text-align: center;
+    padding: 2rem;
+    margin-top: 3rem;
+    border-top: 1px solid rgba(255, 202, 40, 0.3);
+}
+
+footer p {
+    color: #e0e0e0;
+    font-size: 0.9rem;
+}
+
+footer a {
+    color: #ffca28;
+    text-decoration: none;
+    font-weight: bold;
+    transition: color 0.3s ease;
+}
+
+footer a:hover {
+    color: #ffd54f;
+    text-shadow: 0 0 5px rgba(255, 202, 40, 0.5);
+}
+
+/* Responsive tasarım */
+@media (max-width: 768px) {
+    nav ul {
+        flex-direction: column;
+        gap: 1rem;
+        padding: 1rem;
+    }
+    
+    nav ul li a {
+        padding: 0.7rem 1.5rem;
+    }
+    
+    main {
+        margin-top: 200px;
+        padding: 1rem;
+    }
+    
+    h1 {
+        font-size: 2.5rem;
+    }
+    
+    section {
+        padding: 1.5rem;
+    }
+    
+    .project-list {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 480px) {
+    h1 {
+        font-size: 2rem;
+    }
+    
+    section h2 {
+        font-size: 1.5rem;
+    }
+    
+    .project-card {
+        padding: 1rem;
+    }
+}
+
+/* Scroll animasyonları için */
+.fade-in {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.8s ease;
+}
+
+.fade-in.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Özel scroll bar */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: #22262f;
+}
+
+::-webkit-scrollbar-thumb {
+    background: linear-gradient(45deg, #ffca28, #ffd54f);
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(45deg, #ffd54f, #ffca28);
+}
+
+
+::selection {
+    background: rgba(255, 202, 40, 0.3);
+    color: #ffffff;
+}
+
+/* Glow efekti */
+.glow {
+    animation: glow 2s ease-in-out infinite alternate;
+}
+
+@keyframes glow {
+    from {
+        text-shadow: 0 0 5px #ffca28, 0 0 10px #ffca28, 0 0 15px #ffca28;
+    }
+    to {
+        text-shadow: 0 0 10px #ffca28, 0 0 20px #ffca28, 0 0 30px #ffca28;
+    }
+}
